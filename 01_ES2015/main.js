@@ -1,7 +1,7 @@
 'use strict';
 
 class Fighter {
-  constructor(name, power, health) {
+  constructor(name='Black Shadow', power=1, health=100) {
     this.name = name;
     this.power = power;
     this.health = health;
@@ -30,8 +30,18 @@ class Fighter {
     return this.health > 0;
   }
 
-  static fight(fighter1, fighter2, ...point) {
+  static fight(player1, player2, ...point) {
     const max = point.length;
+    let   fighter1, fighter2;
+
+    // determine who strike first
+    if ( randomInteger(2) ) {
+      fighter1 = player1;
+      fighter2 = player2;
+    } else {
+      fighter1 = player2;
+      fighter2 = player1;
+    }
 
     while (fighter1.isAlive() && fighter2.isAlive()) {
       Fighter.strike(fighter1, fighter2, point[ randomInteger(max) ]);
@@ -41,7 +51,7 @@ class Fighter {
 
   static strike(fighter1, fighter2, point) {
     if (fighter1.isAlive()) {
-      if (fighter1 instanceof ImprovedFighter) {
+      if (fighter1 instanceof ImprovedFighter && fighter1.health > 100) {
         fighter1.doubleHit(fighter2, point);
       } else {
         fighter1.hit(fighter2, point);
