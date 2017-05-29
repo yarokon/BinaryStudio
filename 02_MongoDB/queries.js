@@ -12,7 +12,7 @@ db.grades.find({
 db.grades.aggregate(
   [
     {
-      $unwind : '$scores'
+      $unwind: '$scores'
     }, {
       $match: {
         'scores.type': 'exam',
@@ -25,9 +25,11 @@ db.grades.aggregate(
 );
 
 db.grades.update({
-  name:'Dusti Lemmond'
-} ,{
-  $set: {'accepted': true}
+  name: 'Dusti Lemmond'
 }, {
-  multi:true
+  $set: {
+    accepted: true
+  }
+}, {
+  multi: true
 });
