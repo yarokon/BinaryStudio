@@ -32,20 +32,15 @@ class Fighter {
 
   static fight(player1, player2, ...point) {
     const max = point.length;
-    let   fighter1, fighter2;
 
-    // determine who strike first
-    if ( randomInteger(2) ) {
-      fighter1 = player1;
-      fighter2 = player2;
-    } else {
-      fighter1 = player2;
-      fighter2 = player1;
+    // determine who strikes first
+    if (randomInteger(2)) {
+      [player1, player2] = [player2, player1]
     }
 
-    while (fighter1.isAlive() && fighter2.isAlive()) {
-      Fighter.strike(fighter1, fighter2, point[ randomInteger(max) ]);
-      Fighter.strike(fighter2, fighter1, point[ randomInteger(max) ]);
+    while (player1.isAlive() && player2.isAlive()) {
+      Fighter.strike(player1, player2, point[ randomInteger(max) ]);
+      Fighter.strike(player2, player1, point[ randomInteger(max) ]);
     }
   }
 
